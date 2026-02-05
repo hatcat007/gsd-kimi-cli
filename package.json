@@ -35,12 +35,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/optivent/gsd-kimi-cli.git"
+    "url": "https://github.com/hatcat007/gsd-kimi-cli.git"
   },
   "bugs": {
-    "url": "https://github.com/optivent/gsd-kimi-cli/issues"
+    "url": "https://github.com/hatcat007/gsd-kimi-cli/issues"
   },
-  "homepage": "https://github.com/optivent/gsd-kimi-cli#readme",
+  "homepage": "https://github.com/hatcat007/gsd-kimi-cli#readme",
   "engines": {
     "node": ">=16.0.0"
   },

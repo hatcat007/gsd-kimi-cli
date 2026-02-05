@@ -2,7 +2,7 @@
 
 > **Get Shit Done** - A spec-driven development workflow system for [Kimi CLI](https://github.com/MoonshotAI/kimi-cli)
 
-[![Version](https://img.shields.io/badge/version-2.0.0-blue.svg)](https://github.com/optivent/gsd-kimi-cli)
+[![Version](https://img.shields.io/badge/version-2.0.0-blue.svg)](https://github.com/hatcat007/gsd-kimi-cli)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
 ## 🎯 What is GSD?
@@ -25,13 +25,13 @@ GSD (Get Shit Done) is a **context engineering and spec-driven development workf
 
 ```bash
 # Install locally in current project (default)
-curl -fsSL https://raw.githubusercontent.com/optivent/gsd-kimi-cli/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/hatcat007/gsd-kimi-cli/main/install.sh | bash
 
 # Install globally for all projects
-curl -fsSL https://raw.githubusercontent.com/optivent/gsd-kimi-cli/main/install.sh | bash -s -- -g
+curl -fsSL https://raw.githubusercontent.com/hatcat007/gsd-kimi-cli/main/install.sh | bash -s -- -g
 
 # CI/Non-interactive mode
-curl -fsSL https://raw.githubusercontent.com/optivent/gsd-kimi-cli/main/install.sh | bash -s -- -y
+curl -fsSL https://raw.githubusercontent.com/hatcat007/gsd-kimi-cli/main/install.sh | bash -s -- -y
 ```
 
 The installer will:
@@ -54,7 +54,7 @@ npm install gsd-kimi-cli
 
 ```bash
 # Clone the repository
-git clone https://github.com/optivent/gsd-kimi-cli.git
+git clone https://github.com/hatcat007/gsd-kimi-cli.git
 cd gsd-kimi-cli
 
 # Run the local installer
@@ -70,7 +70,7 @@ jim --patch
 jim
 ```
 
-**Note:** `code.kimi.com/install.sh` installs **Kimi CLI itself**. The GSD installer is hosted at `raw.githubusercontent.com/optivent/gsd-kimi-cli/main/install.sh`.
+**Note:** `code.kimi.com/install.sh` installs **Kimi CLI itself**. The GSD installer is hosted at `raw.githubusercontent.com/hatcat007/gsd-kimi-cli/main/install.sh`.
 
 ### Usage
 
@@ -270,7 +270,7 @@ MIT License - see [LICENSE](LICENSE) file
 
 ## 🔗 Links
 
-- [GitHub Repository](https://github.com/optivent/gsd-kimi-cli)
+- [GitHub Repository](https://github.com/hatcat007/gsd-kimi-cli)
 - [Kimi CLI](https://github.com/MoonshotAI/kimi-cli)
 - [Original GSD](https://github.com/glittercowboy/get-shit-done)
 

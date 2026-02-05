@@ -6,8 +6,8 @@
 # To install Kimi CLI, visit: https://github.com/MoonshotAI/kimi-cli
 #
 # Usage: 
-#   curl -fsSL https://raw.githubusercontent.com/optivent/gsd-kimi-cli/main/install.sh | bash
-#   curl -fsSL https://raw.githubusercontent.com/optivent/gsd-kimi-cli/main/install.sh | bash -s -- -g
+#   curl -fsSL https://raw.githubusercontent.com/hatcat007/gsd-kimi-cli/main/install.sh | bash
+#   curl -fsSL https://raw.githubusercontent.com/hatcat007/gsd-kimi-cli/main/install.sh | bash -s -- -g
 
 set -e
 
@@ -23,7 +23,7 @@ C_DIM='\033[2m'
 
 # Configuration
 GSD_VERSION="2.0.0"
-GSD_REPO="https://github.com/optivent/gsd-kimi-cli"
+GSD_REPO="https://github.com/hatcat007/gsd-kimi-cli"
 INSTALLER_URL="${GSD_REPO}/raw/main/installer"
 TEMP_DIR="$(mktemp -d)"
 
@@ -145,8 +145,8 @@ show_help() {
   echo "Installs GSD (Get Shit Done) workflow system for Kimi CLI."
   echo ""
   echo "Usage:"
-  echo "  curl -fsSL https://raw.githubusercontent.com/optivent/gsd-kimi-cli/main/install.sh | bash"
-  echo "  curl -fsSL https://raw.githubusercontent.com/optivent/gsd-kimi-cli/main/install.sh | bash -s -- [OPTIONS]"
+  echo "  curl -fsSL https://raw.githubusercontent.com/hatcat007/gsd-kimi-cli/main/install.sh | bash"
+  echo "  curl -fsSL https://raw.githubusercontent.com/hatcat007/gsd-kimi-cli/main/install.sh | bash -s -- [OPTIONS]"
   echo ""
   echo "Options:"
   echo "  -g, --global       Install globally (default: local)"
@@ -156,13 +156,13 @@ show_help() {
   echo ""
   echo "Examples:"
   echo "  # Local install (recommended)"
-  echo "  curl -fsSL https://raw.githubusercontent.com/optivent/gsd-kimi-cli/main/install.sh | bash"
+  echo "  curl -fsSL https://raw.githubusercontent.com/hatcat007/gsd-kimi-cli/main/install.sh | bash"
   echo ""
   echo "  # Global install"
-  echo "  curl -fsSL https://raw.githubusercontent.com/optivent/gsd-kimi-cli/main/install.sh | bash -s -- -g"
+  echo "  curl -fsSL https://raw.githubusercontent.com/hatcat007/gsd-kimi-cli/main/install.sh | bash -s -- -g"
   echo ""
   echo "  # CI/Non-interactive"
-  echo "  curl -fsSL https://raw.githubusercontent.com/optivent/gsd-kimi-cli/main/install.sh | bash -s -- -y"
+  echo "  curl -fsSL https://raw.githubusercontent.com/hatcat007/gsd-kimi-cli/main/install.sh | bash -s -- -y"
   echo ""
   echo "Note: This installs GSD, not Kimi CLI itself."
   echo "      Get Kimi CLI at: https://github.com/MoonshotAI/kimi-cli"
@@ -183,29 +183,34 @@ setup_installer() {
   # Download installer from GitHub
   info "Downloading GSD installer..."
   
-  cd "$TEMP_DIR"
-  
-  # Download the repository as tarball
-  curl -sL "${GSD_REPO}/archive/refs/heads/main.tar.gz" | tar -xz --strip-components=1 || {
+  # Download and extract to temp directory (don't change working dir)
+  curl -sL "${GSD_REPO}/archive/refs/heads/main.tar.gz" | tar -xz -C "$TEMP_DIR" --strip-components=1 || {
     error "Failed to download installer"
     info "Try: git clone ${GSD_REPO} && cd gsd-kimi-cli && npm install"
     exit 1
   }
   
+  # Verify the installer directory exists
+  if [ ! -d "$TEMP_DIR/installer" ]; then
+    error "Installer directory not found after extraction"
+    error "Contents of temp dir:"
+    ls -la "$TEMP_DIR" >&2
+    exit 1
+  fi
+  
   INSTALLER_DIR="$TEMP_DIR/installer"
   SCRIPTS_DIR="$TEMP_DIR/scripts"
-  success "Installer downloaded"
+  success "Installer downloaded to $INSTALLER_DIR"
 }
 
 # Install dependencies for TUI mode
 install_tui_deps() {
   info "Installing TUI dependencies..."
-  cd "$INSTALLER_DIR"
   
   if command_exists bun; then
-    bun install >/dev/null 2>&1 || npm install
+    (cd "$INSTALLER_DIR" && bun install >/dev/null 2>&1) || (cd "$INSTALLER_DIR" && npm install)
   else
-    npm install
+    (cd "$INSTALLER_DIR" && npm install)
   fi
   
   success "Dependencies installed"
@@ -224,14 +229,12 @@ run_tui_installer() {
     ARGS="$ARGS -y"
   fi
   
-  cd "$INSTALLER_DIR"
-  
   if command_exists bun; then
-    bun run build >/dev/null 2>&1 || npx tsc
-    bun dist/index.js $ARGS
+    (cd "$INSTALLER_DIR" && bun run build >/dev/null 2>&1) || (cd "$INSTALLER_DIR" && npx tsc)
+    bun "$INSTALLER_DIR/dist/index.js" $ARGS
   else
-    npx tsc
-    node dist/index.js $ARGS
+    (cd "$INSTALLER_DIR" && npx tsc)
+    node "$INSTALLER_DIR/dist/index.js" $ARGS
   fi
 }
 

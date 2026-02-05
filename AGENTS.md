@@ -115,7 +115,7 @@ gsd-kimi-cli/
 
 ```bash
 # Clone the repository
-git clone https://github.com/optivent/gsd-kimi-cli.git
+git clone https://github.com/hatcat007/gsd-kimi-cli.git
 cd gsd-kimi-cli
 
 # Run the Node.js installer
@@ -333,7 +333,7 @@ The repository uses GitHub Actions for:
 
 - **npm:** Package published to npm registry
 - **GitHub Releases:** Tarballs for direct download
-- **Homebrew:** `brew install optivent/gsd-kimi-cli/gsd-kimi-cli`
+- **Homebrew:** `brew install hatcat007/gsd-kimi-cli/gsd-kimi-cli`
 - **One-line installer:** `curl` script from GitHub
 
 ---
@@ -411,7 +411,7 @@ The repository uses GitHub Actions for:
 
 ### External Links
 
-- **GitHub Repository:** https://github.com/optivent/gsd-kimi-cli
+- **GitHub Repository:** https://github.com/hatcat007/gsd-kimi-cli
 - **Kimi CLI:** https://github.com/MoonshotAI/kimi-cli
 - **Original GSD:** https://github.com/glittercowboy/get-shit-done
 
