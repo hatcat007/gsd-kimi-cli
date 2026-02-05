@@ -2,6 +2,29 @@
 
 > **Get Shit Done (GSD)** - A spec-driven development workflow system for Kimi CLI
 
+## ⚠️ THIS IS THE DEVELOPMENT PROJECT
+
+**Important:** This repository is the **development source** for GSD Kimi CLI. When you run skills via `/skill:gsd-*` commands in this project, they load from the local `.kimi/` directory (development version), NOT from the system `~/.kimi/` installation.
+
+### Local Development Structure
+
+```
+/Users/buddythacat/Documents/TOOLS/gsd-kimi-cli/
+├── agents/                    # Source: Agent definitions (editable)
+├── skills/                    # Source: Skill definitions (editable)
+├── gsd-agent.yaml             # Source: Master agent config
+├── .kimi/                     # DEV INSTALLATION (used by Kimi CLI)
+│   ├── agents/               # Copy of agents/ (runtime uses this)
+│   ├── skills/               # Copy of skills/ (runtime uses this)
+│   ├── gsd-agent.yaml        # Copy with local paths patched
+│   └── ...
+```
+
+**When testing skills:**
+- `/skill:gsd-progress` → Loads from `.kimi/skills/gsd-progress/SKILL.md`
+- `/skill:gsd-plan-phase` → Loads from `.kimi/skills/gsd-plan-phase/SKILL.md`
+- Subagents spawn from `.kimi/agents/` and `.kimi/skills/gsd-agents/`
+
 ## Project Overview
 
 **Project Name:** GSD for Kimi CLI  
@@ -41,71 +64,41 @@ GSD (Get Shit Done) is a context engineering and spec-driven development workflo
 
 ```
 gsd-kimi-cli/
-├── skills/                    # 27 GSD skills (SKILL.md files)
-│   ├── gsd-master/           # Entry point flow skill
-│   ├── gsd-new-project/      # Project initialization
-│   ├── gsd-plan-phase/       # Phase planning
-│   ├── gsd-execute-phase/    # Plan execution
-│   ├── gsd-verify-work/      # Verification
-│   ├── gsd-progress/         # Status display
-│   ├── gsd-debug/            # Debugging
-│   ├── gsd-quick/            # Quick tasks
-│   └── ... (19 more skills)
-│
-├── agents/                    # 11 GSD subagents
+├── agents/                    # SOURCE: 11 GSD subagents (EDIT HERE)
 │   ├── gsd-executor/         # Executes plans atomically
 │   ├── gsd-planner/          # Creates detailed phase plans
 │   ├── gsd-verifier/         # Validates work against requirements
-│   ├── gsd-debugger/         # Root cause analysis
-│   ├── gsd-roadmapper/       # Creates project roadmaps
-│   ├── gsd-phase-researcher/ # Researches phase implementation
-│   ├── gsd-project-researcher/ # Researches project domain
-│   ├── gsd-research-synthesizer/ # Combines research outputs
-│   ├── gsd-codebase-mapper/  # Analyzes existing codebases
-│   ├── gsd-plan-checker/     # Validates plans before execution
-│   └── gsd-integration-checker/ # Checks cross-phase wiring
+│   └── ... (8 more agents)
+│
+├── skills/                    # SOURCE: 27 GSD skills (EDIT HERE)
+│   ├── gsd-master/           # Entry point flow skill
+│   ├── gsd-new-project/      # Project initialization
+│   ├── gsd-plan-phase/       # Phase planning
+│   └── ... (24 more skills)
 │
 ├── references/                # 9 knowledge bases
-│   ├── questioning.md        # How to gather requirements
-│   ├── planning-config.md    # Planning configuration
-│   ├── verification-patterns.md # Verification approaches
-│   ├── git-integration.md    # Git workflow best practices
-│   ├── model-profiles.md     # Model-specific settings
-│   ├── tdd.md                # Test-driven development
-│   ├── ui-brand.md           # UI/UX guidelines
-│   ├── checkpoints.md        # Checkpoint system
-│   └── continuation-format.md # Handoff format
-│
 ├── workflows/                 # Flow skill templates
-│   ├── complete-milestone.md
-│   ├── diagnose-issues.md
-│   ├── discovery-phase.md
-│   ├── resume-project.md
-│   ├── transition.md
-│   └── verify-phase.md
-│
 ├── patches/                   # Kimi CLI source patches
-│   ├── kimi_cli_patcher.py   # Main patcher script
-│   └── jim-wrapper.py        # Wrapper launcher
-│
 ├── scripts/                   # Installation scripts
-│   ├── install.js            # Main installer (Node.js)
-│   └── uninstall.js          # Uninstaller
-│
 ├── templates/                 # Project templates
-│   ├── AGENTS.md             # Template for project AGENTS.md
-│   └── SKILL.md.template     # Template for new skills
-│
 ├── docs/                      # Documentation
-│   ├── USAGE.md              # Usage guide
-│   ├── PATCHES.md            # Patch documentation
-│   └── phases/               # Phase-specific docs
+├── gsd-agent.yaml             # SOURCE: Master agent config
+├── package.json               # Node.js package manifest
+├── install.sh                 # Bash one-line installer
+├── README.md                  # Project documentation
 │
-├── gsd-agent.yaml            # Master agent configuration
-├── package.json              # Node.js package manifest
-├── install.sh                # Bash one-line installer
-└── README.md                 # Project documentation
+└── .kimi/                     # DEV RUNTIME (auto-populated)
+    ├── agents/                # Copied from agents/
+    ├── skills/                # Copied from skills/
+    ├── skills/gsd-agents/     # Agent subagent configs
+    ├── gsd-agent.yaml         # Patched with local paths
+    └── ...
 ```
+
+**Key Points:**
+- Edit source files in `agents/`, `skills/`, `gsd-agent.yaml`
+- Local testing uses `.kimi/` (development runtime)
+- Run `node scripts/install.js` to sync source → `.kimi/`
 
 ---
 
@@ -419,6 +412,24 @@ The repository uses GitHub Actions for:
 
 ## For AI Agents Working on This Project
 
+### Documentation Lookup (ALWAYS Use Context7)
+
+**CRITICAL:** When you need information about libraries, frameworks, or APIs, **ALWAYS use the Context7 MCP tool** instead of guessing or relying on training data.
+
+```
+1. Call resolve-library-id with the library name
+2. Call query-docs with the library ID and your specific question
+3. Use the returned documentation to implement correctly
+```
+
+**Use Context7 for:**
+- Library/framework APIs (OpenTUI, React, Express, etc.)
+- Function signatures and options
+- Official patterns and best practices
+- Troubleshooting and common issues
+
+**NEVER guess APIs** - always look them up with Context7 to ensure accuracy.
+
 ### Before Making Changes
 
 1. Read `package.json` for project metadata
@@ -440,21 +451,33 @@ The repository uses GitHub Actions for:
 3. Register in `gsd-agent.yaml` subagents section
 4. Add description for Task tool integration
 
-### Testing Changes
+### Testing Changes (Development Workflow)
+
+When working on this project, follow this workflow:
 
 ```bash
-# Reinstall locally
+# 1. Edit source files
+#    - agents/<agent-name>/system.md
+#    - skills/<skill-name>/SKILL.md
+#    - gsd-agent.yaml
+
+# 2. Sync to development runtime (.kimi/)
 node scripts/install.js
 
-# Verify installation
-node scripts/install.js --verify
-
-# Test the skill/agent
+# 3. Test with REAL skill execution
+#    (This uses .kimi/ NOT ~/.kimi/)
 jim
+/skill:gsd-progress
+/skill:gsd-help
 /skill:gsd-<skill-name>
+
+# 4. Verify changes
+node scripts/install.js --verify
 ```
+
+**Important:** Skills load from `/Users/buddythacat/Documents/TOOLS/gsd-kimi-cli/.kimi/skills/` when in this project directory. This ensures you're testing the development version, not the system-installed version.
 
 ---
 
-*Last updated: 2025-02-05*  
+*Last updated: 2025-02-06*  
 *Generated for GSD for Kimi CLI v2.0.0*

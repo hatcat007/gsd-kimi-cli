@@ -2,12 +2,15 @@
 import sys
 from pathlib import Path
 
+# Get the project root (parent of .kimi directory)
 kimi_dir = Path(__file__).parent.resolve()
 project_root = kimi_dir.parent
 
+# Add patches to path
 patches_dir = kimi_dir / 'patches'
 sys.path.insert(0, str(patches_dir))
 
+# Handle patch commands
 if len(sys.argv) > 1 and sys.argv[1] in ['--patch', '--restore', '--status']:
     patcher = patches_dir / 'kimi_cli_patcher_v2.py'
     if not patcher.exists():
@@ -24,5 +27,6 @@ else:
     cmd = ['kimi']
     if agent_file.exists():
         cmd.extend(['--agent-file', str(agent_file)])
+    # Set working directory to project root
     cmd.extend(sys.argv[1:])
     subprocess.run(cmd, cwd=project_root)

@@ -1,8 +1,0 @@
-[
-  {"title": "Install GSD patches", "done": true},
-  {"title": "Verify all 5 files patched", "done": true},
-  {"title": "Test syntax validation", "done": true},
-  {"title": "Test context loading", "done": true},
-  {"title": "Complete integration testing (VERIFICATION.md)", "done": true},
-  {"title": "Create GSD documentation", "done": true}
-]

@@ -1,13 +1,13 @@
 {
   "name": "gsd-installer",
   "version": "2.0.0",
-  "description": "GSD TUI Installer with OpenTUI",
+  "description": "GSD TUI Installer with OpenTUI (Bun required)",
   "type": "module",
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
-    "start": "node dist/index.js",
-    "dev": "tsc && node dist/index.js"
+    "start": "bun dist/index.js",
+    "dev": "bun run build && bun dist/index.js"
   },
   "dependencies": {
     "@opentui/core": "^0.1.77",
@@ -20,6 +20,7 @@
     "typescript": "^5.3.0"
   },
   "engines": {
-    "node": ">=18.0.0"
-  }
+    "bun": ">=1.0.0"
+  },
+  "engineStrict": true
 }
