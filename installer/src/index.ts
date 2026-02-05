@@ -710,6 +710,19 @@ async function showSummary(renderer: any) {
   renderer.root.remove(container);
 }
 
+async function resetTerminal() {
+  // Reset terminal to normal mode
+  process.stdout.write('\x1b[?25h'); // Show cursor
+  process.stdout.write('\x1b[0m');   // Reset attributes
+  process.stdout.write('\x1b[2J');   // Clear screen
+  process.stdout.write('\x1b[H');    // Move cursor to home
+  process.stdout.write('\x1b[?1049l'); // Exit alternate screen
+  process.stdout.write('\x1b[?2004l'); // Disable bracketed paste
+  process.stdout.write('\x1b[?1004l'); // Disable focus events
+  process.stdin.setRawMode(false);
+  process.stdin.pause();
+}
+
 async function main() {
   const renderer = await createCliRenderer({
     exitOnCtrlC: true,
@@ -727,6 +740,7 @@ async function main() {
     process.exit(1);
   } finally {
     renderer.destroy();
+    await resetTerminal();
   }
 }
 
