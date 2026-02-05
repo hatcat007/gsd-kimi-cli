@@ -9,11 +9,15 @@
     "gsd-kimi-verify": "scripts/verify.js"
   },
   "scripts": {
-    "install": "node scripts/install.js",
+    "postinstall": "node scripts/detect-install-mode.js",
+    "install:global": "node scripts/install.js",
+    "install:local": "node .kimi/install-local.js",
     "patch": "node scripts/patch.js",
     "verify": "node scripts/verify.js",
     "test": "node scripts/test.js",
-    "uninstall": "node scripts/uninstall.js"
+    "uninstall": "node scripts/uninstall.js",
+    "gsd": "./.kimi/jim",
+    "gsd:global": "jim"
   },
   "keywords": [
     "gsd",
@@ -49,9 +53,13 @@
     "scripts/",
     "templates/",
     "docs/",
+    "installer/",
+    "install.sh",
     "README.md",
     "LICENSE",
     "gsd-agent.yaml"
   ],
-  "preferGlobal": true
+  "dependencies": {
+    "@opentui/core": "^0.1.77"
+  }
 }

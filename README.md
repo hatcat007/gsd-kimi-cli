@@ -21,12 +21,46 @@ GSD (Get Shit Done) is a **context engineering and spec-driven development workf
 
 ### Installation
 
+#### Option 1: One-Line Installer (Recommended)
+
+```bash
+# Install locally in current project (default)
+curl -fsSL https://raw.githubusercontent.com/optivent/gsd-kimi-cli/main/install.sh | bash
+
+# Install globally for all projects
+curl -fsSL https://raw.githubusercontent.com/optivent/gsd-kimi-cli/main/install.sh | bash -s -- -g
+
+# CI/Non-interactive mode
+curl -fsSL https://raw.githubusercontent.com/optivent/gsd-kimi-cli/main/install.sh | bash -s -- -y
+```
+
+The installer will:
+- **Auto-detect** if Bun is available for beautiful TUI mode
+- **Fallback** to CLI mode with Node.js
+- **Default to local** installation (project-specific)
+- Support `-g` flag for global installation
+
+#### Option 2: npm (Global)
+
+```bash
+# Install globally
+npm install -g gsd-kimi-cli
+
+# Or install locally in a project
+npm install gsd-kimi-cli
+```
+
+#### Option 3: Manual
+
 ```bash
 # Clone the repository
 git clone https://github.com/optivent/gsd-kimi-cli.git
 cd gsd-kimi-cli
 
-# Run the installer
+# Run the local installer
+node .kimi/install-local.js
+
+# Or for global install
 node scripts/install.js
 
 # Apply Kimi CLI patches (optional but recommended)
@@ -35,6 +69,8 @@ jim --patch
 # Start using GSD
 jim
 ```
+
+**Note:** `code.kimi.com/install.sh` installs **Kimi CLI itself**. The GSD installer is hosted at `raw.githubusercontent.com/optivent/gsd-kimi-cli/main/install.sh`.
 
 ### Usage
 

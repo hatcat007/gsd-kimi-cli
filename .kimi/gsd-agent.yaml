@@ -2,7 +2,7 @@ version: 1
 agent:
   # GSD Agent Identity
   name: gsd-master
-  system_prompt_path: ~/.kimi/skills/gsd-agents/gsd-system.md
+  system_prompt_path: /Users/buddythacat/Documents/TOOLS/gsd-kimi-cli/.kimi/skills/gsd-agents/gsd-system.md
   system_prompt_args:
     ROLE_ADDITIONAL: |
       You are the GSD (Get Shit Done) Master Agent.
@@ -38,47 +38,47 @@ agent:
   subagents:
     # Core Execution Agents
     gsd-executor:
-      path: ~/.kimi/skills/gsd-agents/gsd-executor/sub.yaml
+      path: /Users/buddythacat/Documents/TOOLS/gsd-kimi-cli/.kimi/skills/gsd-agents/gsd-executor/sub.yaml
       description: "Execute GSD plans atomically with proper git commits. Use for: implementing features, fixing bugs, refactoring code. Provides: file modifications, atomic commits, SUMMARY.md generation"
     
     gsd-planner:
-      path: ~/.kimi/skills/gsd-agents/gsd-planner/sub.yaml
+      path: /Users/buddythacat/Documents/TOOLS/gsd-kimi-cli/.kimi/skills/gsd-agents/gsd-planner/sub.yaml
       description: "Create detailed executable phase plans with research integration. Use for: breaking down phases into plans, defining tasks, setting verification criteria. Provides: NN-YY-PLAN.md files with 2-4 tasks each"
     
     gsd-verifier:
-      path: ~/.kimi/skills/gsd-agents/gsd-verifier/sub.yaml
+      path: /Users/buddythacat/Documents/TOOLS/gsd-kimi-cli/.kimi/skills/gsd-agents/gsd-verifier/sub.yaml
       description: "Verify phase completion against defined goals. Use for: checking must-haves, validating implementation, creating verification reports. Provides: VERIFICATION.md with pass/gap status"
     
     gsd-debugger:
-      path: ~/.kimi/skills/gsd-agents/gsd-debugger/sub.yaml
+      path: /Users/buddythacat/Documents/TOOLS/gsd-kimi-cli/.kimi/skills/gsd-agents/gsd-debugger/sub.yaml
       description: "Debug issues using scientific method. Use for: root cause analysis, investigating bugs, creating fix plans. Provides: debug session files with diagnosis and fix approach"
     
     # Research & Analysis Agents
     gsd-phase-researcher:
-      path: ~/.kimi/skills/gsd-agents/gsd-phase-researcher/sub.yaml
+      path: /Users/buddythacat/Documents/TOOLS/gsd-kimi-cli/.kimi/skills/gsd-agents/gsd-phase-researcher/sub.yaml
       description: "Research implementation approach for a specific phase. Use for: tech stack research, best practices, common pitfalls. Provides: NN-RESEARCH.md with Standard Stack, Architecture Patterns, Confidence Levels"
     
     gsd-project-researcher:
-      path: ~/.kimi/skills/gsd-agents/gsd-project-researcher/sub.yaml
+      path: /Users/buddythacat/Documents/TOOLS/gsd-kimi-cli/.kimi/skills/gsd-agents/gsd-project-researcher/sub.yaml
       description: "Research project domain and ecosystem. Use for: new project research, domain analysis, competitor review. Provides: ecosystem research and technology recommendations"
     
     gsd-research-synthesizer:
-      path: ~/.kimi/skills/gsd-agents/gsd-research-synthesizer/sub.yaml
+      path: /Users/buddythacat/Documents/TOOLS/gsd-kimi-cli/.kimi/skills/gsd-agents/gsd-research-synthesizer/sub.yaml
       description: "Synthesize multiple research outputs into actionable insights. Use for: combining phase research, creating unified recommendations. Provides: synthesized findings with trade-off analysis"
     
     gsd-codebase-mapper:
-      path: ~/.kimi/skills/gsd-agents/gsd-codebase-mapper/sub.yaml
+      path: /Users/buddythacat/Documents/TOOLS/gsd-kimi-cli/.kimi/skills/gsd-agents/gsd-codebase-mapper/sub.yaml
       description: "Map and analyze codebase structure across 4 focus areas: tech (STACK.md, INTEGRATIONS.md), arch (ARCHITECTURE.md, STRUCTURE.md), quality (CONVENTIONS.md, TESTING.md), concerns (CONCERNS.md). Use for: brownfield projects, understanding existing code, onboarding. Documents guide gsd-plan-phase and gsd-execute-phase for maintaining consistency"
     
     # Planning Support Agents
     gsd-roadmapper:
-      path: ~/.kimi/skills/gsd-agents/gsd-roadmapper/sub.yaml
+      path: /Users/buddythacat/Documents/TOOLS/gsd-kimi-cli/.kimi/skills/gsd-agents/gsd-roadmapper/sub.yaml
       description: "Create project roadmaps with phases and milestones. Use for: initial project planning, milestone definition, phase sequencing. Provides: ROADMAP.md with phases, goals, dependencies"
     
     gsd-plan-checker:
-      path: ~/.kimi/skills/gsd-agents/gsd-plan-checker/sub.yaml
+      path: /Users/buddythacat/Documents/TOOLS/gsd-kimi-cli/.kimi/skills/gsd-agents/gsd-plan-checker/sub.yaml
       description: "Verify plans achieve phase goals before execution. Use for: plan validation, identifying gaps, ensuring completeness. Provides: verification report with PASS or NEEDS_WORK status"
     
     gsd-integration-checker:
-      path: ~/.kimi/skills/gsd-agents/gsd-integration-checker/sub.yaml
+      path: /Users/buddythacat/Documents/TOOLS/gsd-kimi-cli/.kimi/skills/gsd-agents/gsd-integration-checker/sub.yaml
       description: "Verify cross-phase integration and system connectivity. Use for: checking exports are imported, APIs are consumed, E2E flows work. Provides: INTEGRATION_REPORT.md with connection status"

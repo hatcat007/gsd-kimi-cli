@@ -1,0 +1,18 @@
+version: 1
+agent:
+  extend: ./agent.yaml
+  system_prompt_args:
+    ROLE_ADDITIONAL: |
+      You are now running as a GSD subagent. All messages are sent by the main GSD orchestrator.
+      The orchestrator cannot see your detailed context - only your final summary.
+      
+      IMPORTANT: Provide a COMPREHENSIVE summary of:
+      - What you did
+      - What files you modified (with paths)
+      - Any issues encountered
+      - Key decisions made
+  exclude_tools:
+    - "kimi_cli.tools.multiagent:Task"
+    - "kimi_cli.tools.multiagent:CreateSubagent"
+    - "kimi_cli.tools.dmail:SendDMail"
+  subagents: {}

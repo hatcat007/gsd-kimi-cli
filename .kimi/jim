@@ -1,0 +1,28 @@
+#!/usr/bin/env python3
+import sys
+from pathlib import Path
+
+kimi_dir = Path(__file__).parent.resolve()
+project_root = kimi_dir.parent
+
+patches_dir = kimi_dir / 'patches'
+sys.path.insert(0, str(patches_dir))
+
+if len(sys.argv) > 1 and sys.argv[1] in ['--patch', '--restore', '--status']:
+    patcher = patches_dir / 'kimi_cli_patcher_v2.py'
+    if not patcher.exists():
+        patcher = patches_dir / 'kimi_cli_patcher.py'
+    if patcher.exists():
+        import subprocess
+        action = sys.argv[1].replace('--', '')
+        subprocess.run([sys.executable, str(patcher), action])
+    else:
+        print("❌ Patcher not found.")
+else:
+    import subprocess
+    agent_file = kimi_dir / 'gsd-agent.yaml'
+    cmd = ['kimi']
+    if agent_file.exists():
+        cmd.extend(['--agent-file', str(agent_file)])
+    cmd.extend(sys.argv[1:])
+    subprocess.run(cmd, cwd=project_root)
