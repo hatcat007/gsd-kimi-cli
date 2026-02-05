@@ -206,6 +206,15 @@ setup_installer() {
 # Install dependencies for TUI mode
 install_tui_deps() {
   info "Installing TUI dependencies..."
+  info "DEBUG: INSTALLER_DIR=$INSTALLER_DIR"
+  info "DEBUG: Directory exists? $(test -d "$INSTALLER_DIR" && echo "YES" || echo "NO")"
+  
+  if [ ! -d "$INSTALLER_DIR" ]; then
+    error "Installer directory not found: $INSTALLER_DIR"
+    error "Contents of parent:"
+    ls -la "$(dirname "$INSTALLER_DIR")" >&2
+    exit 1
+  fi
   
   if command_exists bun; then
     (cd "$INSTALLER_DIR" && bun install >/dev/null 2>&1) || (cd "$INSTALLER_DIR" && npm install)
